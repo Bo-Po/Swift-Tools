@@ -66,6 +66,24 @@ extension String {
         let str2 = subString(start: locat+1)
         return str1 + content + str2
     }
+    /// 判断是否有emoji
+    var containsEmoji: Bool {
+        for scalar in unicodeScalars {
+            switch scalar.value {
+            case
+            0x00A0...0x00AF,
+            0x2030...0x204F,
+            0x2120...0x213F,
+            0x2190...0x21AF,
+            0x2310...0x329F,
+            0x1F000...0x1F9CF:
+                return true
+            default:
+                continue
+            }
+        }
+        return false
+    }
 }
 
 extension String {
