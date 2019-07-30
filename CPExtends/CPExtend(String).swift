@@ -109,10 +109,22 @@ extension String {
     }
 }
 
+extension String { // 日期 date
+    /// string 格式化 默认格式 yyyyMMdd->yyyy-MM-dd
+    public func string(format from: String = "yyyyMMdd", to: String = "yyyy-MM-dd") -> String? {
+        let dateFormatter = DateFormatter();
+        dateFormatter.dateFormat = from;
+        let date = dateFormatter.date(from: self);
+        if date == nil {
+            return nil;
+        }
+        dateFormatter.dateFormat = to;
+        return dateFormatter.string(from: date!);
+    }
+}
+
 extension NSAttributedString {
-//    static func configAttributedString(_ strings: Array<String>, fonts: Array<UIFont>, colors: Array<UIColor>) -> NSAttributedString {
-//        return self.configAttributedString(strings, fonts: fonts, colors: colors, links: nil);
-//    }
+    
     static func configAttributedString(_ strings: Array<String>, fonts: Array<UIFont>, colors: Array<UIColor>, links: Dictionary<Int, String>? = nil) -> NSAttributedString {
         let frist: NSMutableAttributedString = NSMutableAttributedString(string: "");
         for (index, string) in strings.enumerated() {
